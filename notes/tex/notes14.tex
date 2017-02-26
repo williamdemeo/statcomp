@@ -1,0 +1,42 @@
+%**start of header
+\documentclass{article}
+\newcommand{\pipe}{$|\:$}
+\usepackage{fullpage}
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{9/26/97 }
+\maketitle
+\section{Matrix Multiplication}
+The i,jth element is the dot product of the ith row of the first matrix with
+the jth col of the second matrix.
+To matrix multiply A and B, nrowa is the stride for matrix A, 
+while 1 is the stride for B.  So the i,jth element is\\\\
+{\tt dots(a+i, b+(j*nrowb),ncola,nrowa,1)}\\\\
+Recall \\\\
+{\tt dots(double *a, double *b, long n, long ix, long iy) \\
+= dots(A, B, inner dimension, stride for A, stride for B)}\\
+\\
+To do the matrix multiplication $A^tB$, the ijth element is \\
+\\
+{\tt dots(a+(i*nrowa), b+(j*nrowb),nrowa, 1,1)}
+\\\\
+Now consider the problem of multiplying $X^tX$.
+\begin{eqnarray*}
+(X^tX)_{ij} & =& \sum_{k=1}^n(X^t)_{ik}X_{kj}\\
+&  = &\sum_{k=1}^nX_{ki}X_{kj}\\
+\end{eqnarray*}
+The last line is the dot product of the ith col and the jth col.
+{\tt
+\begin{verbatim}
+for(i=0;i<p;i++)
+  for(j=0;j<=i,j++)
+\end{verbatim}}
+\indent $X^tX_{ij}$ = dot product of (col i of X and col j of X)
+
+\end{document}
+
+
+

@@ -1,0 +1,111 @@
+%**start of header
+\documentclass{article}
+\newcommand{\pipe}{$|\:$}
+\usepackage{fullpage}
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{9/19/97}
+\maketitle
+
+\section{Memory Allocation}
+{\tt
+\begin{tabbing}
+xxxxx\=xxxxx\= \kill
+\#inlcude $<$stdlib.h$>$\>\>\\
+\>\>\\
+double *dmalloc(long n)\>\>\\
+\{\>\>\\
+\>double *x;\>\\
+\>\>\\
+\>if ((x=(double*) malloc((unsigned)(n*sizeof(double)))) == NULL)\>\\
+\>\{\>\\
+\>\>printf("Error: Couldn't get \%ul bytes of memory$\backslash$n",\\ 
+\>\>(unsigned)(n*sizeof(doulbe)));\\
+\>\>exit(1);\\
+\>\}\>\\
+return(x);\>\>\\
+\}\>\>
+\end{tabbing}
+}
+\noindent Save the function in a file called {\tt memory.c} 
+and compile it with:\\\\
+{\tt cc -c memory.c}\\\\
+which results in a file called {\tt memory.o}.
+Now we don't need to compile the memory allocation program again.
+When we have the listing:\\\\
+{\tt
+double * dmalloc(long n); /* function declaration */\\
+double * y;\\
+y= dmalloc(n);}\\\\
+we can simply use \\
+\\
+{\tt cc -o myprog myprog.c memory.o}\\
+
+Suppose we want a function which finds the maximum of an array of doubles.  Could return
+the max through the function name, and return the index by modifying an input argument.
+Some people like to write functions which only return either 1 or 0 depending on if the
+function was successful or not.  In that case, you would have to pass two address 
+references to the function.  We now describe the first model:\\\\
+{\tt double getmax(double *x, long n, long *index)\\\\
+long i, imax; /* i is the index counter */\\
+\indent \indent/* imax is the temporary max value */\\
+double xmax;\\\\
+imax = 0;\\
+xmax = x[0]; /* This syntax is helpful (intead of *x) */ \\
+\indent \indent /* Because it reminds us that we're using */\\
+\indent \indent /* a pointer to an array */ \\
+for(i=1;i<n;i++)\{\\
+if(x[i]>xmax)\{\\
+xmax=x[i];\\
+imax=i;\\
+\}\}\\
+\\
+*index = imax;\\
+return(xmax);\\
+\}}\\
+\\
+So how would we call this function?\\
+\\
+{\tt double x[1000];\\
+\\
+double getmax(double *, long, long *); /* function prototype */\\
+\indent /* note that, we don't need to actually */ \\
+\indent /* declare a pointer to long to be passed /* \\
+\indent /* to getmax().  We can just declare a long */ \\
+\indent /* variable and pass it's address. */ \\
+\\
+double themax;\\
+long theindex;\\\\
+themax = getmax(x, 1000, \&theindex);}\\
+
+A better {\tt dmalloc()} function would look like:\\
+\\
+{\tt int dmalloc2(long n, double **x)\\
+\{\\
+*x = (double *) ...\\
+\}}\\
+\\
+Now we would call it with \\
+\\
+{\tt double *x;\\
+i = dmalloc1(n,\&x);}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

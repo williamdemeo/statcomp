@@ -1,0 +1,133 @@
+%**start of header
+\documentclass{article}
+\usepackage{fullpage}
+\newcommand{\pipe}{$|\:$}
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{August 29, 1997}
+\maketitle
+
+{\bf Topics}\\
+\begin{enumerate}
+\item Shell Services
+\begin{itemize}
+\item ~\ref{sec:redirection} Redirection
+\item ~\ref{sec:jobcontrol} Job Control
+\item ~\ref{sec:pathnames} Path Names
+\end{itemize}
+\end{enumerate}
+
+\section{Shell Services}
+
+We begin with some useful examples.  The command \\
+{\tt head -12 \emph{filename}}\\
+will show you the first 12 lines of the file called \emph{filename}. 
+The command \\
+{\tt tail -14 \emph{filename}}\\
+will show you the last 14 lines of the file called  \emph{filename}.  The
+command {\tt grep} finds regular expressions in its input.  For example,\\
+{\tt grep \emph{string} \emph{filename} } \\
+displays those lines of \emph{filename} containing occurances of \emph{string}.
+
+\subsection{Redirection}
+\label{sec:redirection}
+To use {\tt grep} to find any errors in the output of \emph{program},
+we redirect the program's output, making it input to the {\tt grep}
+command.  To do this, run \emph{program} as follows: \\
+{\tt \emph{program} \pipe grep -i error}\\
+To learn about the kind of expressions {\tt grep} will accept, check 
+out the article on regular expressions on Phil Spector's web page.\\
+Some more examples of redirection:\\
+{\tt > \&} redirects both stderr and stdout to a file \\
+{\tt > > \&} appends both to file \\
+{\tt \pipe \&}  pipes both to a file \\
+To seperate stdout and stderr you could write \\
+{\tt(\emph{command} >  outfile) > \& errorfile} \\
+Once you direct stdout to {\tt outfile}, all that's left is stderr 
+which you can redirect into {\tt errorfile}.
+
+Suppose you want to execute a command on a bunch of files whose names are
+all listed in the file filenames.  For example, suppose you want to 
+copy all files in filenames to {\tt someotherdirectory}.  Use the ` charater: \\
+{\tt cp `cat filenames` someotherdirectory}\\
+Another example: \\
+{\tt emacs `ls -t \pipe head -5`} \\
+This opens emacs with 5 buffers containing the last 5 files.
+
+\subsection{Job Control}
+\label{sec:jobcontrol}
+{\tt ps} lists processes you've initiated in a given shell.\\
+If you run command on some shell on machine bugaboo, then run
+{\tt ps} in a different shell window on bugaboo, it won't show you the job
+command running on bugaboo.\\
+{\tt ps -af} will list all processes on bugaboo. \\
+{\tt ps -af \pipe grep \emph{username}} will list all processes on bugaboo which have
+been initiated by username. \\
+If you run a job that will run for a while and that you will check
+periodically, you must remember on what machine you started the job.
+
+In an interactive program \\
+{\tt C-c} \\
+interrupts\footnote{Notation: C-c means that you must hold down the Control key
+  and press the letter c}. 
+Some programs don't listen to this so the next thing you could do is\\ 
+{\tt C-$\backslash$}  \\
+which submits a quit signal. Many programs won't quit at optimal times
+since this is an order to quit immediately.  The suspend signal\\
+{\tt C-z}\\
+puts job in the backround. 
+To run any job in the backround, put an \& at the end of the command.  This does not
+put output in backround, so any output will still be printed to terminal screen.
+When you put a job in the backround you should, almost invariably, redirect stdout.
+If you will remain at the terminal use \\
+{\tt command >  output \& }\\
+If you will leave the terminal, you have to also redirect stderror with \\
+{\tt command > \& output \&}\\
+You could also redirect output to other shells.  Type tty to find out what filename
+corresponds to a given shell, then redirect output to that filename.  Remember not to kill
+the shell!
+
+If a job is running for a while and you want to leave, use {\tt C-z} and you get\\
+{\tt [2] command (stopped)} \\
+Now type {\tt bg} to get the job to start again in background.  To get it back into the foreground
+type {\tt fg}.  If there are other jobs running, be more specific by
+typing {\tt fg 2}, where 2 is the number of the job.  Job numbers can
+be found by typing {\tt jobs}.
+
+If you logout and then want to kill your job, get back on machine on which job
+started.  Type {\tt ps -af \pipe grep \emph{ username}}.  
+Note the process id (pid), say 27531, then type \\
+{\tt kill 27531} \\
+Easiest way to check that it worked is to type it again \\
+{\tt !!} \\
+If it's still running, you need something stronger.  Try \\
+{\tt kill -9 27531} \\
+If it still doesn't stop, it's a zombie, and the only way to stop it is to shut down the machine.
+ 
+Miscellaneous note: \\
+If you want a filename but don't really want a file you could use /dev/null
+and nothing happens.
+
+\subsection{Path Names}
+\label{sec:pathnames}
+When Phil puts samples in the s243 directory, it will be in the ta's directory.  That is, \\
+{\tt /class/g/s243/s243/samples} \\
+If you want to copy file {\tt test.c} from this directory you would write \\
+{\tt cp /clas/g/s243/s243/samples} \\
+But it's a pain to do this every time, so we need some shortcuts.\\
+. is the current directory \\
+.. is one level up \\
+So from your home directory for the class account, you can type \\
+{\tt cp ../s243/samples/test.c} \\
+Another Example: 
+What if you created a program in your home directory, but then do some clean up work
+and want to move it into it's own directory.  Enter the following commands:
+{\tt mkdir hw1} \\
+{\tt cd hw1} \\
+{\tt mv ../program.c }\\
+Your home directory is denoted $\sim$, which is a shell service.
+
+\end{document}

@@ -1,0 +1,110 @@
+%**start of header
+\documentclass{article}
+\newcommand{\pipe}{$|\:$}
+\usepackage{fullpage}
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{9/22/97}
+\maketitle
+{\bf Topics}
+\begin{enumerate}
+\item Functions
+\begin{itemize}
+\item ~\ref{sec:communication} Communication Between Functions
+\item ~\ref{sec:variables} External (Global) Variables
+\end{itemize}
+\end{enumerate}
+
+\section{Functions}
+A good function for summing:\\\\
+{\tt double sum(double *x, long n)\\
+\{\\ 
+double xs;\\
+xs=0;\\
+while(n--) xs += *(x++);\\
+return(xs);\\
+\}}\\
+\\
+We pass the values stored at the address {\tt x}, and use these values
+to compute the sum.  The function never changes the values stored at {\tt x}.
+
+\subsection{Communication Between Functions}
+\label{sec:communication}
+
+The \emph{scope} of a variable describes how widely the value of that variable 
+is known to your program.  Generally speaking, one should only pass to a function the
+information that the function really needs.  This is a concept known
+as information hiding, and is based on the idea that, the less a
+function has access to, the less it can damage.  A function should 
+rarely need access to anything not passed to it in its argument list.
+There are exceptional cases, however:  
+\begin{itemize}
+\item Suppose we have a large graphics subsystem.
+We have variables like scale, origin, line type, axis information, etc. that
+all functions need to know.  We could put all these variables in a structure 
+and pass it to every function.
+\item Suppose we have a function which accepts another function as an argument, but
+has a limited argument list which we don't want to change.  Then we need a
+new way to communicate between functions. 
+\end{itemize}
+Keep in mind that these are special circumstances.  In general you should be 
+wary of giving functions access to too much.
+
+\subsection{External (Global) Variables}
+\label{sec:variables}
+
+In one and only one file, we declare an external or global variable outside of the
+main function.\\\\
+{\tt double *x;\\\\
+main()\\
+\{ $\ldots$}\\\\
+This variable is automatically accessible by anything inside this file.  To access
+that variable from another file, declare it with the {\tt extern} qualifyer, which
+says, don't create new memory for this variable, go out and look for the existing
+variable.  E.g., in the file funct1.c, we have:\\\\
+{\tt
+extern double *x;\\\\
+funct1()\\
+\{ $\ldots$}\\\\
+In a third file, we might only want access to the global variable from within 
+the {\tt funct3()} function:\\\\
+{\tt
+funct3()\\
+\{\\
+extern double *x;\\
+$\ldots$}
+
+In the first case scenario, that of a large graphics subsystem, it is a stupid idea
+to declare all the variables as extern.  Instead, for communication within
+a single file, declare the variable outside any curly braces, using the {\tt static} 
+qualifier.  The variable is now available to any function in that file.  
+
+Don't use these techniques just because defining the same kind of variable is getting
+tiresome.  If something goes wrong with the value of a variable that has a large scope,
+you will have to find out what's going on in each function that has access to the variable --
+a big pain.
+
+Another effect of the static qualifier is that the memory allocated for a static variable
+is untouched throughout the program, so the value store there can only be changed by 
+explicitly changing the static variable.  i.e. the compiler will not reallocate the memory.
+Ex:\\\\
+{\tt
+double func(long int n)\\
+\{\\
+static double *x;\\
+static long start=1;\\
+if(start==1){\\
+x = dmalloc(n);\\
+start = 0;\\
+}\\
+$\ldots$}
+
+\end{document}
+
+
+
+
+

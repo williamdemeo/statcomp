@@ -1,0 +1,94 @@
+%**start of header
+\documentclass{article}
+\newcommand{\pipe}{$|\:$}
+\usepackage{fullpage}
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{10/1/97 }
+\maketitle
+\section{Uniform Random Number Generator}
+1. Linear Congruential U(0,1) Generator
+This generator is based on four numbers
+\begin{itemize}
+\item m = modulus 
+\item c = increment
+\item a = multiplier
+\item $X_0$ = seed
+\end{itemize}
+
+The formula for this generator is \\
+\[
+X_{n+1} = \mbox{mod}(aX_n + c, m)
+\]
+\\
+For $X_0$ system clock value is one possible source of a starting value. 
+We can set $X_0$ to the clock value with the line:\\\\
+{\tt seed = time();}
+
+If c = 0, the method is called a \emph{multiplicative congruential generator}.
+
+By their very nature, these generators have a cycle, or period 
+which is the number of unique vlues which are produced 
+before it starts repeating.  We want a period equal to the number
+of unique values in the computer.  So we should pick the largest
+unsigned integer for $m$, or $2^p$ where $p$ is the number of bits on the 
+computer.  But this is the same as just using the formula
+\[X_{n+1} = aX_n + c \]
+
+It can be shown that a mixed congruential generator will have period m
+iff 
+\begin{enumerate}
+\item c is relatively prime to m 
+\item mod(a,p) = 1 for all prime factors p of m 
+\item mod(a,4) = 1 if 4 is a factor of m 
+\end{enumerate}
+
+\subsection{Composite Generators}
+\[X_{n+1} = \mbox{mod}(a_1 X_n + c_1 , m)\]
+\[Y_{n+1} = \mbox{mod}(a_2 Y_n +c_2, m)\]
+\[W_n = \mbox{mod}(X_n + Y_n, m)\]
+
+\subsection{Quadratic Congruential Generator}
+\[X_{n+1} = \mbox{mod}(a X_n^2 + aX_n + c, m) \]
+ 
+\subsection{Additive Generators}
+see {\tt man 3 random}
+\[X_n \mbox{mod}(X_{n - r_1} + X_{n - r_2}, m), n \geq max(r_1, r_2) \]
+
+To start, the first $max(r_1, r_2)$ numbers are chosen arbitrarilly
+$r_1 = 24, r_2 = 55$ possibly good starting values.
+
+\subsection{Feedback shift Register Techniques (Tausworthe generators)}
+Linear recurrence relation among the bits of the random number.
+\[ a_k = mod((c_p a_{k-p} +c_{p-1}a_{k-p+1} + \cdots + c_1 a_{k-1}, 2) \]
+
+The $\{c_i\}$ are fixed and equal to 0 or 1.
+
+\subsection{Shuffling}
+We can make any random number generator more random by using \emph{shuffling}.
+The procedure is as follows:
+\begin{enumerate}
+\item Initialization 
+\begin{itemize}
+\item Generaute an array of, say, 100 random numbers 
+\item You should have it automatically initialized 
+\end{itemize}
+\item Generate another random number y to start the process. 
+\item Each time you want a random number, use y to find an index
+into v: {\tt index = (int)( 100 * y((double)m)}
+where m is the modulus.
+\item Set y = v[index] 
+\item Replace v[index] with a new random number 
+\item Return y.
+\end{enumerate}
+
+
+\end{document}
+
+
+
+
+

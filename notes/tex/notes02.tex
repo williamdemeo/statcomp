@@ -1,0 +1,85 @@
+%**start of header
+\documentclass{article}
+\usepackage{fullpage}
+\newcommand{\pipe}{$|\:$}
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{September, 1997}
+\maketitle
+
+{\bf Topics}\\
+\begin{enumerate}
+\item Some Basics of C Programming
+\begin{itemize}
+\item ~\ref{sec:gettingstarted} Getting Started \\
+\item ~\ref{sec:declarations} Declarations \\
+\item ~\ref{sec:compilers} C Compilers at the SCF
+\end{itemize}
+\end{enumerate}
+
+\section{Some Basics of C Programming}
+\subsection{Getting Started}
+\label{sec:gettingstarted}
+
+Some good places to look for information about the C programming language are:
+\begin{itemize}
+\item \emph{The C Programming Language 2nd Edition} (ANSI standard), 
+Kernigan and Ritchie \\
+\item Phil Spector's C programming tutorial on his web page.
+\item FAQ in comp.lang.c at http://wwwcis.ohio-state.edu/hypertext/faq/usenet
+\end{itemize}
+
+Programs in C consist of one or more functions.  
+Exactly one of the functions must have the name {\bf main}.
+The simplest C program: main(){ }.
+A more useful program is:
+{\tt
+\begin{tabbing}
+\=main()\{\=scanf(``\%lf'',\&x);\=   \kill \\
+\> main()\{\>\> \\
+\>\>        double x,y;\> \\
+\>\>        printf(``Enter first number: '');\> \\
+\>\>        scanf(``\%lf'',\&x); /* read a long float (double) and */\>\\
+\>\>\>                           /* put it at the address where x is */\\
+\>\>        printf(``Enter second number: '');\> \\
+\>\>        scanf(``\%lf'',\&y);\> \\
+\>\>        printf(``The sum is \%lf $\backslash$n'', x+y);\> \\
+\}\>\>\>\\
+\end{tabbing}
+}
+
+\subsection{Declarations}
+\label{sec:declarations}
+
+{\bf char} is a character variable (1 byte integer)\\
+{\bf int} is an integer (defaults to the natural size of the machine)
+\footnote{On the Sun, the integer is very big so portability problems}\\
+{\bf short} is an integer which specifies that it will be a small integer\\
+{\bf long} is an integer which specifies that it will be as large as possible\\
+long and short are the same on the Sun.  Use long for portability.\\
+{\bf float} is a single precision floating point number\\
+{\bf double} is a double precision floating point number\\
+{\bf void} is a special declaration for functions that don't return anything
+
+You can modify any of these data types by putting {\bf unsigned} in 
+front of them for nonnegative numbers.  
+It frees the sign bit, so your capacity is essentially doubled.
+
+\subsection{C Compilers at the SCF}
+\label{sec:compilers}
+
+Most of the computing at the SCF is now done on Sun UltraSparc work
+stations.  These work stations run the Sun Solaris operating system.
+On this system, there are generally two flavors of C compiler: cc and gcc.  
+cc was developed by Sun so it is the most efficient when run on a Sun workstation.
+
+\end{document}
+        
+
+
+
+
+

@@ -1,0 +1,98 @@
+%**start of header
+\documentclass{article}
+\newcommand{\pipe}{$|\:$}
+\usepackage{fullpage}
+
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{September 10, 1997}
+\maketitle
+
+{\bf Topics}\\
+\begin{enumerate}
+\item Operators
+\begin{itemize}
+\item ~\ref{sec:relational} Relational and Logical Operators
+\item ~\ref{sec:increment} Increment and Decrement Operators
+\item ~\ref{sec:assignment} Assignment Operators
+\end{itemize}
+\item Promotion
+
+\end{enumerate}
+
+\section{Operators}
+\subsection{Relational and Logical Operators (cont.)}
+\label{sec:relational}
+
+Instead of \\\\
+{\tt if(n>100)\{\\
+\indent if(x = getdat())\{}
+\\\\
+one should consider using \\\\
+{\tt if(n > 100 \&\& x=getdat()) }\\\\
+The reason: one doesn't want to have to read many if statements 
+to understand the structure of the program.\\\\
+{\bf Other Remarks:}\\
+The unary operator ! changes 0 to 1 and any nonzero to 0.\\
+The assignment expression n=5 sets n equal to 5 but also evaluates to 5.  So 
+the line\\\\
+{\tt j=(n=5)}\\\\
+assigns n equal to 5 and j equal to 5.\\\\
+{\tt if(copy=n)\{ /* single equals ok */\}}\\\\
+copies value of n to variable copy, then evaluates the if statements
+if n is nonzero.  Comment is useful here since you might be tempted 
+to correct with double equals.
+
+\subsection{Increment and Decrement Operators}
+\label{sec:increment}
+{\bf Some Examples}\\
+The listing \\\\
+{\tt n=5;\\
+x=n++;}\\\\
+will result in {\tt x = 5} and {\tt n = 6}.  
+On the other hand, the listing \\\\
+{\tt n=5;\\
+x=++5;}\\\\
+results in {\tt x = 6} and {\tt n = 6}.
+
+\subsection{Assignment Operators}
+\label{sec:assignment}
+{\bf Some Examples}\\
+The listing\\\\
+{\tt b = b * scale;}\\\\
+is the same as\\\\
+{\tt b *= scale;}
+\\\\
+and {\tt i++} is the same as {\tt i+=1} is the same as {\tt i = i+1}.
+
+\subsection{Tertiary Operator}
+\label{sec:tertiary}
+{\bf Some Examples}\\\\
+The listing\\\\
+{\tt if(x > 0) ess = x;\\
+else ess = 0;}\\\\
+is the same as \\\\
+{\tt ess = x > 0 ? x : 0 }\\\\
+Another commonly used example:\\\\
+{\tt min = x > y ? y : x;}
+
+\section{Promotion}
+
+The compiler will convert one value to a more meaningful value (more
+bits) when it encounters them in an assignment; e.g.\\
+short -> long \\
+float -> double \\
+The compiler will also truncate; e.g.\\\\
+{\tt double x;\\
+int ix;\\
+x = 7.9; ix = x;}\\\\
+yields {\tt ix = 7;}\\
+
+To convert a character representation of an integer to integer or
+float use:  {\tt atoi()} or {\tt atof()}
+
+\end{document}
+

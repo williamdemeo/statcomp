@@ -1,0 +1,121 @@
+%**start of header
+\documentclass{article}
+\newcommand{\pipe}{$|\:$}
+\usepackage{fullpage}
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{September 12, 1997}
+\maketitle
+
+{\bf Topics}
+\begin{enumerate}
+\item C Programming
+\begin{itemize}
+\item ~\ref{sec:loops} Loops
+\item ~\ref{sec:switch} The {\tt switch} Statement
+\item ~\ref{sec:flow} Flow of Control
+\item ~\ref{sec:running} Running the Program
+\end{itemize}
+\end{enumerate}
+
+
+
+\section{C Programming}
+{\bf TIP:}  If you want to comment out a bunch of code while debugging, but that
+bunch of code has comments within it, surround the block with an {\tt if}
+statement that will never be executed, e.g. {\tt if(0)}.
+
+\subsection{Loops}
+\label{sec:loops}
+
+A very common mistake is to put a semicolon immediately after the 
+while expression; e.g. \\
+{\tt while(n $<$ 100); n++;} \\
+creates an infinite loop.
+\\
+
+The {\it do while} loop:
+\begin{tabbing}
+doxxx\=doxxx\= statements\kill
+\>{\tt do}\> \\
+\>\>{\it statements} \\
+\>{\tt while(\emph{expression});} \>
+\end{tabbing}
+Remember the semicolon after \emph{this} while expression!
+\\
+The listing
+\begin{tabbing}
+for( \= for( \= statements \kill
+\>{\tt for(expr1; expr2; expr3)}\>\\
+\>\>\emph{statements}
+\end{tabbing}
+Is the same as
+\begin{tabbing}
+for(\=for(\=statements\kill
+\>{\tt expr1;}\>\\
+\>{\tt while(expr2)\{}\>\\
+\>\>\emph{statements}\\
+\>\>expr3;\\
+\>\}\>
+\end{tabbing}
+
+A good use for {\tt for} loops is array and vector processing:\\
+{\tt for(sum = 0,i = 0; i $<$ n \&\& sum $<$ 1000; sum += x[i++]);}\\
+
+\subsection{The {\tt switch} Statement}
+\label{sec:switch}
+{\tt
+\begin{tabbing}
+char\=switch\=switch\= \kill
+char opt;\>\>\>\\
+\>switch(opt)\>\>\\
+\>\>case 'a':\>\\
+\>\>\>\emph{statements}\\
+\>\>\>break;\\
+\>\>case 'b':\>\\
+\>\>\>\emph{statements}\\
+\>\>\>break;\\
+\>\>default:\>\\
+\>\>\>\emph{statements}\\
+\>\>\>break;
+\end{tabbing}
+}
+\subsection{Flow of Control}
+\label{sec:flow}
+
+{\tt break} provides an early exit from {\tt for, while, do while, and
+switch}.  It does not break you out of an if statement.  You would need
+a {\tt goto} statement for that.
+
+{\tt continue} causes the next iteration of a {\tt while} or {\tt do while}
+loop.  In a {\tt for } loop, it executes the third expression, and 
+looping continues.
+
+\subsection{Getting the Program to Run}
+\label{sec:running}
+
+An \emph{object file} is a file containing machine instructions usually
+produced by a compiler.  In contains statements involving function calls,
+but the function calls are not always in that object file.  So you must
+link your object files, to create an \emph{executable file}.
+An executable file contains machine instructions including the associated
+functions.  It is a file that can actually be run.  The \emph{linker}
+combines object files, searches libraries and creates an executable.
+You often need to tell the linker which libraries you will use:\\
+{\tt cc prog.c}\\
+produces a file called {\tt a.out}.  Don't let it call it that.  Use instead:\\
+{\tt cc -o prog prog.c}\\
+To use the math library, use:\\
+{\tt cc -o prog prog.c -lm}\\
+
+Often you will want to compile different parts of your program into 
+different object files called, say, {\tt part1.o, part1.o}, etc.
+To compile a program without linking, use:\\
+{\tt cc -c part1.c}\\
+Once {\tt part1.c} works, you compile {\tt part2.c} with:\\
+{\tt cc -o prog part1.o part2.c -lm}\\
+
+\end{document}

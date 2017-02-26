@@ -1,0 +1,90 @@
+%**start of header
+\documentclass{article}
+\newcommand{\pipe}{$|\:$}
+\usepackage{fullpage}
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{9/17/97}
+\maketitle
+
+\section{Arrays}
+1.  We create a two dimensional array with:\\
+
+{\tt double x[10][5]}\\
+\\
+or, better yet,\\
+
+{\tt double **x}\\\\
+2.  Now we must allocate space to this \emph{pointer to pointer to
+  double}.  We could start with\\ 
+
+{\tt x = (double**) malloc( (unsigned) (nrow * sizeof(double*)) );}\\
+\\
+which allocates space for a (column) vector of nrow pointers to
+double.  Then we allocate space for each row:\\
+
+{\tt for(i=0;i<nrow;i++) x[i] = (double*) malloc((unsigned)(ncol*sizeof(double))}\\
+\\
+or, better, we could first allocate all the memory in x[0] 
+(assuring that the array will be stored contiguously).  We do this 
+as follows:\\
+
+{\tt xt = x[0] = (double *) malloc((unsigned)(nrow*ncol*sizeof(double)));}\\
+\\
+Then distribute the space accross the other rows:\\
+
+{\tt for(i=1;i<nrow;i++) x[i]=(xt+=ncol);}\\
+\\
+Suppose we store a 5 $\times$ 3 matrix by columns.  Then the (i,j)th
+element is in position j*nrow+i.  That is, x[i][j] = x[j*nrow+i].  
+Instead of using so much subscripting, we should instead use pointer
+arithmatic.
+
+Suppose we want the mean of each column of an nrow $\times$ ncol
+matrix, where we've declared:\\
+\\
+{\tt double *x;\\
+x=(double *)malloc((unsigned)(nrow*ncol*sizeof(double)));\\
+if(x==NULL) exit(1);}\\
+\\
+Could fill the matrix with:\\
+\\
+{\tt for(i=0;i<nrow;i++)\\
+for(j=0;j<ncol;j++) scanf(``\%lf'',\&x[j*nrow+i]);}\\
+\\
+Instead we should do it this way:\\
+\\
+{\tt double *xt;\\
+for(i=0;i<nrow;i++)\\
+xt = x+i;\\
+for(j=0;j<ncol;j++,xt+=nrow)\\
+scanf(``\%lf'',xt);}\\
+\\
+Now we compute the mean of the columns:\\
+\\
+{\tt double *means;\\
+double z;\\
+means = (double *) malloc((unsigned)(ncol*sizeof(double)));\\
+if(mean==NULL) exit(1);\\
+for(j=0;j<ncol;j++)\{\\
+z=0;\\
+for(i=0;i<nrow;i++)\\
+z+=x[j*nrow+i];\\
+means[j]=z/(double)nrow;\\
+\}}\\
+\\
+But, better yet, we should do\\
+\\
+{\tt double *xt;\\
+xt = x;
+for(j=0;j<ncol;j++)\\
+z=0;\\
+for(i=0;i<nrow;i++,xt++) z+=*xt;\\
+mean[j] = z/(double)nrow;}
+
+\end{document}
+
+

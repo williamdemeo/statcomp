@@ -1,0 +1,141 @@
+%**start of header
+\documentclass{article}
+\newcommand{\pipe}{$|\:$}
+\usepackage{fullpage}
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{9/26/97 }
+\maketitle
+\section{Some I/O and File Handling}
+Some helpful man pages are {\tt man cc} and {\tt man printf}.\\
+\\
+Consider the following code segment:
+\\
+{\tt
+short s;\\
+s*2 }
+\\
+The compiler will promote {\tt s} to integer so instead you must use:
+\\
+{\tt s* (short)2}
+
+\subsection{I/O}
+When you read in data for a program, the computer converts the data into
+binary.  When you save the data set to disk, you might consider storing
+it in binary format so that, next time you access it, its all ready and
+much quicker.  This is called \emph{unformatted io}, as opposed to 
+\emph{formatted io}.  In this class, we'll never need unformatted io, since
+once we solve a problem, we're done with the data.  Storing data unformatted
+on the hard disk is what virtual memory does.
+
+Consider the {\tt printf} function:
+\\\\
+{\tt printf("control string", list of arguments);}
+\\\\
+The compiler reads the control string until it gets to an argument,
+say {\tt \%d}.  Then
+it goes to the address of the argument variables and reads the first,
+say {\tt sizeof(int)} bytes.  Therefore, if you specify the wrong data type,
+e.g. {\tt \%lf} when you wanted {\tt \%f}, you will get garbage.
+
+Some {\tt printf} and {\tt scanf} codes:
+\\\\
+{\tt \%d} or {\tt \%nd} for integers (n for a known length)\\
+{\tt \%c}  for a single characters\\
+{\tt \%s} or {\tt \%ns} for a string of length n\\
+{\tt \%f}  or {\tt \%nf} for floating point numbers\\
+{\tt \%n.df} to specify the digits of precision.
+{\tt \%e} for exponential notation\\
+{\tt \%g} is "best" for most\\
+\\
+The {\tt d} and {\tt f} codes can be preceded by an {\tt l} to indicate the 
+long version.  The u modifier allows you to read and write unsinged formats.
+
+{\bf Important Note:}  With {\tt scanf}, if you expect a single
+character from the user and then a carriage return, and you try to read it with 
+{\tt \%c}, the  carriage return is read as a character.  Instead, to
+read one character use {\tt \%1s}, eg: \\\\
+{\tt scanf("\%1s", \&resp);}
+
+\subsection{Redirection}
+It might be worth directing output to a file without using the UNIX
+facilicty for doing so.
+{\tt 
+\begin{verbatim}
+#include <stdio.h>
+int main(int argc, char **argv){
+    FILE *infile;
+    infile=fopen("filename",mode); /* open the file */
+    <code>
+}
+\end{verbatim}
+}
+Mode is either "r" for read of "w" for write.  We will also want
+to do this when we don't know what the filename is.  First, you could
+prompt the user:
+{\tt 
+\begin{verbatim}
+#include <stdio.h>
+int main(int argc, char **argv){
+    char filename[110];
+    printf("Name of file? ");
+    scanf("%s", filename);
+    infile = fopen(filename, "r");
+    if(infile==NULL){
+        fprintf(stderr,"couldn't open file %s\n", filename)
+    }
+    <code>
+}
+\end{verbatim}
+}
+Probably the best method (especially if we only need one file) is to
+have the user specify a file to use on the commandline:
+{\tt 
+\begin{verbatim}
+#include <stdio.h>
+int main(int argc, char **argv){
+    if(argc != 2){
+        fprintf(stderr, "specify a file\n");
+        exit(1);
+    }
+    if(loadfile(argv[1])==1){
+        fprintf(stderr, "couldn't load file %s\n", argv[1]);
+        exit(1);
+    }
+    <code>
+}
+
+int loadfile(char *filename){
+    infile = fopen(filename, "r");
+    if(infile==NULL) return 1;
+    else return 0;
+}
+\end{verbatim}
+}
+You might look at {\tt man fopen} to find out more. 
+
+\subsection{Reading and Writing to and from Strings}
+Sometimes you want to construct the output line in memory,
+then print it all at once.\\\\
+{\tt
+sprintf(char *, control, args);\\
+sscanf(char *, control string, args);\\
+}\\
+You might use this if you have to examine string for the type of its 
+contents before you print it out.
+{\tt
+\begin{verbatim}
+char buffer[256];
+scanf("%s",buffer);
+sscanf(&buffer[19],"%lf",&number);
+\end{verbatim}
+}
+Each member of the scanf family returns the number of formatted objects read.
+If scanf returns a 0, it is done reading.
+
+\end{document}
+
+

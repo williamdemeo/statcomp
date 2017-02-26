@@ -1,0 +1,85 @@
+%**start of header
+\documentclass{article}
+\newcommand{\pipe}{$|\:$}
+\usepackage{fullpage}
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{9/26/97 }
+\maketitle
+\section{Pre-processor, Macro Substitution, Conditional Compilation}
+To get online help for the NAG Library at the SCF, type {\tt xnaghelp}.
+For Matlab help, type {\tt helpdesk}.
+\\\\
+{\tt cdecl} is a UNIX program which gives you help on declarations.
+\\\\
+Another command in the global and static world:
+\\\\
+{\tt register double y;}
+\\\\
+If there is a register available and if the compiler is so written, it will 
+be assigned to a register.  Since the variable is in a register, it is
+accessed faster. 
+\\\\
+Do a block once:
+{\tt
+\begin{verbatim}
+static int first=1;
+if(first){
+    <code>
+    first=0;
+}
+\end{verbatim}
+}
+\subsection{preprocessor}
+{\tt cpp -E} or {\tt cc -E} will run only preprocessor statements like
+{\tt \#include,\#define}.  You can specify additional directories to
+search for header files when using {\tt cc -E}.
+
+\subsection{Macro Substitution}
+{\tt
+\#define EPSILON 1.e-8\\
+if(x<EPSILON)\{ \}}
+\\\\
+is identical to \\\\
+{\tt
+if(x<1.e-8)}
+\\
+This is pure text substitution.
+\\\\
+Other examples:
+{\tt
+\begin{verbatim}
+#define MAX(a,b)  ((a) >(b) ? (a) : (b))
+
+3*MAX(z+1,y)         /* same as:   3 * z+1 > y ? z+1 : y */
+
+#define ABS(X) ((X) > 0 ? (X) : (-(X)))
+
+y=ABS(f(X));     /* same as:  y = ( f(X) > 0 ? f(X) : -f(X))
+
+/* Or, this way might be better:  */
+
+Z=f(X);
+y=ABS(Z);
+\end{verbatim}
+}
+
+\subsection{Conditional Compilation}
+{\tt 
+\begin{verbatim}
+#if CONSTANT
+    <code>
+#endif
+\end{verbatim}}
+For example, in some file or header file:\\
+{\tt
+\#define DEBUG 1\\
+\#if DEBUG\\
+\#endif\\
+}
+
+
+\end{document}

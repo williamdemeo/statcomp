@@ -1,0 +1,57 @@
+%**start of header
+\documentclass{article}
+\newcommand{\pipe}{$|\:$}
+\usepackage{fullpage}
+%**end of header
+
+\begin{document}
+\title{Statistics 243: \emph{class notes}}
+\author{William J. De Meo}
+\date{October 13, 1997 }
+\maketitle
+We want to find an alternative to computing $X^tX$.
+
+Let $X$ be an $n\times p$ full rank matrix.  Then there exists
+an orthonormal matrix $Q$, and an upper triangular matrix $R$, such that
+$X = QR$.
+
+Normal equations 
+\begin{eqnarray*}
+X^tX \hat \beta & =& X^t y\\
+(QR)^t(QR)\hat \beta &=& (QR)^t y\\
+R^tR \hat \beta & = & R^t Q^t y\\
+\end{eqnarray*}
+Note that R is full rank, so
+\[R\hat \beta = Q^t y\]
+a system of p equations, where the rhs, $Q^t y$ involves np 
+multiplications.  We can solve this triangular system with 
+back substitution.
+
+Now let's find the QR decomposition of $n \times p$ matrix X.
+
+Modified Gram Schmitt:\\\\
+for $j=1$ to $p$ \{\\
+define $r_{jj} = \sqrt{\sum_i x_{ij}^2}$, the norm of $x_j$\\
+check if $abs(r_{jj}) <$ some small number (say, $\sqrt{macheps}$)\\
+\\
+for $i=1$ to $n$ \{\\
+\indent $x_{ij} = x_{ij}/r_{jj}$\\
+\}
+end for $i$\\
+for $k=j+1$ to $p$ \{\\
+\indent $r_{jk} = \sum_i x_{ij}x_{ik}$\\
+\indent for $i=1$ to $n$ \{\\
+\indent \hspace{1.5 cm}$x_{ik} = x_{ik} - x_{ij}r_{jk}$\\
+\indent \} end for k\\
+\} end for j\\
+
+Now we want to compute $Var(\hat \beta)$
+\begin{eqnarray*}
+Var(\hat \beta)& =& \sigma^2(X^tX)^{-1}\\
+& = & \sigma^2 (R^{-1})^tR^{-1}
+\end{eqnarray*}
+
+\end{document}
+
+
+
