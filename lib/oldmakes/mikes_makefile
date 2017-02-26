@@ -1,0 +1,7 @@
+CC=cc
+
+OBJECTS = gram2  memory  misc 
+
+$(OBJECTS) : $$@.c
+	$(CC) -c $? -lm
+

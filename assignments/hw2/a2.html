@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta name="GENERATOR" content="TtH 3.67">
+ <style type="text/css"> div.p { margin-top: 7pt;}</style>
+ <style type="text/css"><!--
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td div.norm {line-height:normal;}
+ span.roman {font-family: serif; font-style: normal; font-weight: normal;} 
+ span.overacc2 {position: relative;  left: .8em; top: -1.2ex;}
+ span.overacc1 {position: relative;  left: .6em; top: -1.2ex;} --></style>
+
+ 
+<title>STAT 243 ASSIGNMENT 2&nbsp;&nbsp;&nbsp;FALL, 2010</title>
+ 
+<h1 align="center"><font size="+2"><b>STAT 243 ASSIGNMENT 2 FALL, 2010</b></font> </h1>
+
+
+<table align="center" border="0"><tr><td>
+</td><td align="right"> <i>due November 8, 2010</i></td></tr></table><!--hboxt-->
+
+<ol type="1">
+<li><font size="+1"><b>Mean and Variance Algorithms</b></font>
+
+<div class="p"><!----></div>
+Write a program to calculate the mean and variance using the
+following three different methods:
+
+
+<ol type="a">
+<li>Desk Calculator Algorithm
+<div class="p"><!----></div>
+</li>
+
+<li>
+Method of Provisional Means
+<div class="p"><!----></div>
+</li>
+
+<li>
+Centering around the First Observation
+<div class="p"><!----></div>
+</li>
+</ol>
+
+
+<div class="p"><!----></div>
+Test your program using numbers of
+your choice, and verify your answer using a 
+program such as R, SAS, matlab, or a routine from
+the <tt>lapack</tt> libraries.
+<div class="p"><!----></div>
+</li>
+
+<li>
+<font size="+1"><b>Ill-conditioned data</b></font>
+
+<div class="p"><!----></div>
+Construct a sequence of data sets such that the coefficient
+of variation (std. deviation / mean) becomes increasingly
+smaller.  Continue your sequence until one or more of the 
+algorithms in part 1 no longer gives correct answers.
+At what value of the coefficient of variation do you begin
+to see problems?  At what value of the coefficient of variation
+does the calculation break down completely?  
+
+<div class="p"><!----></div>
+<i>Hint:</i>&nbsp;You
+can generate the sequence you need by adding a progressively
+larger constant to any set of numbers.
+<div class="p"><!----></div>
+</li>
+
+<li>
+<font size="+1"><b>Uniform Random numbers</b></font>
+
+<div class="p"><!----></div>
+Write a function to generate uniform random numbers in the
+range of 0 to 1.  Use a multiplicative congruential generator,
+with modulus 2<sup>32</sup>, and a value of your own choosing for
+a (but make sure mod(a,8) is 3 or 5.) Calculate
+the mean and variance for several sequences of numbers from
+your generator, using one of the programs written for part 1.  What 
+is the theoretical value of the mean and variance for a uniform
+distribution from 0 to 1?  How do your observed values compare
+to these values?
+<div class="p"><!----></div>
+</li>
+
+<li>
+<font size="+1"><b>Normal Random Numbers</b></font>
+
+<div class="p"><!----></div>
+Write a program to generate normally distributed random numbers
+with mean 0 and variance 1
+by a) using the Polar method, and b) adding together six uniform
+random numbers.  Examine the means, variances,
+minimums and maximums from each of ten samples from each method
+to insure that they look reasonable. Compare the time it takes 
+to generate normal
+random variables by the two methods.  
+
+<div class="p"><!----></div>
+<i>Note:</i>&nbsp;In order to time a program, you can use the system call 
+<tt>getrusage()</tt>.  To make things easier, look at the file
+<tt>timer.h</tt> in <tt>../s243/samples</tt>.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+</li>
+
+<li><font size="+1"><b>EXTRA CREDIT</b></font><br />
+Using one or more of the methods described in class, 
+test your random number generator or the random generators from
+R, matlab, SAS, or some other source.
+<div class="p"><!----></div>
+</li>
+</ol>
+
+<br /><br /><hr /><small>File translated from
+T<sub><font size="-1">E</font></sub>X
+by <a href="http://hutchinson.belmont.ma.us/tth/">
+T<sub><font size="-1">T</font></sub>H</a>,
+version 3.67.<br />On 18 Aug 2010, 14:37.</small>
+</html>

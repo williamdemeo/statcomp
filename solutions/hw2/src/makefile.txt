@@ -1,0 +1,44 @@
+# Makefile for illtest momtests
+
+HOME = /home/chip
+HOMEBASE = $(HOME)/classes/s243/programs/hw2
+HOMELIB = $(HOME)/lib
+INCL = -I$(HOMELIB)/include
+CC = gcc
+
+# Ill-conditioned data test
+illtest: illtest.o moment.o $(HOMELIB)/util_lib.a
+        $(CC) -o illtest -lm illtest.o moment.o $(HOMELIB)/util_lib.a 
+
+illtest.o: illtest.c
+        $(CC) $(INCL) -c illtest.c
+
+# Ill-conditioned data test (debugging)
+illtest.db: illtest.do moment.do $(HOMELIB)/util_lib.a
+        $(CC) -o illtest.db -lm illtest.do moment.do $(HOMELIB)/util_lib.a
+
+illtest.do: illtest.c
+        $(CC) $(INCL) -o illtest.do -c -g illtest.c
+
+# (moment.do: is made below)
+
+
+# Ordinary routine test
+momtest: momtest.o moment.o $(HOMELIB)/util_lib.a
+        $(CC) -o momtest momtest.o moment.o $(HOMELIB)/util_lib.a
+
+momtest.o: momtest.c
+        $(CC) $(INCL) -c momtest.c
+
+moment.o: moment.c
+        $(CC) -c moment.c
+
+# Ordinary routine test debugging
+momtest.db: momtest.do moment.do $(HOMELIB)/util_lib.a
+        $(CC) -o momtest.db momtest.do moment.do $(HOMELIB)/util_lib.a
+
+momtest.do: momtest.c
+        $(CC) $(INCL) -o momtest.do -c -g momtest.c
+
+moment.do: moment.c
+        $(CC) -o moment.do -c -g moment.c

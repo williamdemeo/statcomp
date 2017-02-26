@@ -1,0 +1,5 @@
+junk 
+was used to test the matrix reader (matread) and writer
+(matprint) which are contained in the utilties library.
+memalloctest.c was used to test the memory allocation routines in utilities.c
+.

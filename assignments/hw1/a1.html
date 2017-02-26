@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0049)http://www.stat.berkeley.edu/classes/s243/a1.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><meta name="GENERATOR" content="TtH 3.67">
+ <style type="text/css"> div.p { margin-top: 7pt;}</style>
+ <style type="text/css"><!--
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td div.norm {line-height:normal;}
+ span.roman {font-family: serif; font-style: normal; font-weight: normal;} 
+ span.overacc2 {position: relative;  left: .8em; top: -1.2ex;}
+ span.overacc1 {position: relative;  left: .6em; top: -1.2ex;} --></style>
+
+ 
+<title>STAT 243 ASSIGNMENT 1&nbsp;&nbsp;&nbsp;FALL, 2010</title>
+ 
+</head><body><h1 align="center"><font size="+2"><b>STAT 243 ASSIGNMENT 1 FALL, 2010</b></font> </h1>
+
+
+<table align="center" border="0"><tbody><tr><td>
+</td><td align="right"> <i>due October 4, 2010</i></td></tr></tbody></table><!--hboxt-->
+
+<ol type="1">
+<li><font size="+1"><b>Function Prototypes</b></font>
+
+<div class="p"><!----></div>
+Consider the following function, which adds two double precision floating 
+point numbers:
+
+
+<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;sum(double&nbsp;x,&nbsp;double&nbsp;y)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return(x&nbsp;+&nbsp;y);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+</pre>
+
+For this assignment, create a file containing this function definition,
+and a second file with 
+a program which calls the <tt>sum</tt> function using two <b>integer</b>
+arguments, and which prints the value returned by <tt>sum</tt>.  Compile and
+run the program twice, first declaring sum as
+
+
+<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;sum();
+
+</pre>
+
+and then using a function prototype, like
+
+
+<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;sum(double,double);
+
+</pre>
+
+Does the value printed by the program when you use the first declaration
+agree with the value when you use the function prototype?  Explain why or why 
+not.
+<div class="p"><!----></div>
+</li>
+
+<li>
+<font size="+1"><b>Determining Machine Constants</b></font>
+
+<div class="p"><!----></div>
+Write a program (or programs) to determine the following:
+
+<ul>
+<li><b>Largest Integer</b> What is the largest integer (both long and
+short) that can be handled in the computer?  What happens when an integer becomes larger
+than this due to a computation?
+<div class="p"><!----></div>
+</li>
+
+<li>
+<b>Largest Unsigned Integer</b> What is the largest unsigned integer (both long and
+short) that can be handled in the computer?  What happens when an 
+unsigned integer becomes larger than this due to a computation?
+<div class="p"><!----></div>
+</li>
+
+<li>
+<b>Largest Floating Point Number</b> What  is  the largest floating  point  
+number  (both single and double 
+precision) which can be handled in the computer?  What  happens
+when  a  number becomes larger than this due to a computation?
+<div class="p"><!----></div>
+</li>
+
+<li>
+<b>Machine Epsilon</b> One important constant on the computer is  the  
+smallest number such that, when it is added to 1, the result is greater than 
+1.  What is the value  of machine epsilon?
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+The simplest way to determine these constants is to write  a
+program  which starts with the number 1, and then multiplies
+or divides it by 2, printing out the result at  each  stage.
+These  results  can  be  examined,  and it is usually pretty
+clear what the value of the constant is.  A better  solution
+is   to  write  a program which can detect when the constant
+has been found, and to break out of the loop and  print  the
+answer  at that time.  The first solution is acceptable, but
+try to aim for the second method.
+
+<div class="p"><!----></div>
+<i>Note:</i>&nbsp;&nbsp;Most of the values described above can be found  in  a
+header  file in the standard include directory  <tt>/usr/include</tt>.
+If you can find the appropriate header file, it  may  be  of
+interest  to  compare  the  results  in  that  file with the
+results of your program.   (Please  note  that  finding  the
+header  file does not constitute completing the assignment.)
+
+<div class="p"><!----></div>
+</li>
+
+<li>
+<font size="+1"><b>Probability Tables for the Chi-squared
+Distribution</b></font>
+
+<div class="p"><!----></div>
+Write a program that will prompt a user for degrees of freedom and
+probability level, and which will then print the critical 
+chi-squared value.
+You will need to use a subroutine from a library such as <tt>dcdflib</tt> to
+calculate the critical value; look at <tt>/app/dcdflib/doc/dcdflib.fdoc</tt>
+for information on how to call these routines.
+You should have some 
+provision in
+your program to allow the user to make multiple requests, and then
+terminate the program in a "graceful" way.
+
+<div class="p"><!----></div>
+<i>Note:</i>&nbsp;&nbsp;The  dcdflib routines are written in  FORTRAN and
+you'll write your main routine in C so you'll need to learn how
+to call FORTRAN routines from C.  Type  <tt>help fortran_from_c</tt>
+for more information.
+<div class="p"><!----></div>
+</li>
+</ol>
+
+<br><br><hr><small>File translated from
+T<sub><font size="-1">E</font></sub>X
+by <a href="http://hutchinson.belmont.ma.us/tth/">
+T<sub><font size="-1">T</font></sub>H</a>,
+version 3.67.<br>On 18 Aug 2010, 14:36.</small>
+
+</body><style type="text/css">embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[src*=".swf"],object[codebase*="swflash.cab"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"],object[classid*="d27cdb6e-ae6d-11cf-96b8-444553540000"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"]{	display: none !important;}</style></html>

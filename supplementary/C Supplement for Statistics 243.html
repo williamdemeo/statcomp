@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!-- saved from url=(0062)http://www.math.hawaii.edu/~williamdemeo/C/stat243/csuppl.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>C Supplement for Statistics 243</title>
+</head>
+<body>
+<meta name="description" value="No Title">
+<meta name="keywords" value="csuppl">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+<p>
+ </p><h3> Supplementary C Programming Information</h3>
+Statistics 243 Fall, 1998
+<ol><li>
+One useful technique when writing a program is to allow the user to
+specify arguments on the command line, for example the name of a file
+to be read, or values to control the execution of the program.  Although
+the <tt> main</tt> program is often defined with no arguments, you can always
+use two optional arguments to <tt> main</tt> to get access to any 
+information which was provided on the command line, namely <tt> argc</tt>,
+which is an integer containing the number of arguments passed on the command 
+line (including the name of the program itself), and <tt> argv</tt>, which is an 
+array of pointers to the (null-terminated)
+values of the arguments, with the convention that 
+<tt> argv[0]</tt> points to the name of the program.
+Memory for the values is automatically
+provided by the operating system, and is guaranteed to be stable throughout
+the execution of the program.
+<p>
+The following program shows how to declare the necessary
+arguments, as well as how to access the values of command line arguments
+passed to the program.
+</p><pre>main(int argc, char *argv[])
+{
+   short i;
+
+   printf("There were %d arguments passed to %s\n", argc, argv[0]);
+   printf("The arguments were:\n");
+   for(i=1;i&lt;argc;i++)printf("Argument %d: %s\n",i,argv[i]);
+}
+</pre>
+<p>
+Note that arguments passed to programs are always null-terminated character 
+strings, and should be converted (using <tt> atoi</tt>, <tt> atof</tt> or 
+<tt> sscanf</tt>) if a numeric value is desired.  For an example of how to parse
+UNIX style command line options (with hyphens), see 
+<a href="http://www.math.hawaii.edu/~williamdemeo/C/samples/sq.c"><tt>~s243/samples/sq.c</tt></a> or the man page
+for <tt>getopt</tt>.
+</p><p>
+</p></li><li>
+Virtually all the I/O that you need when dealing with numerical operations
+will be formatted I/O, using <tt> fprintf</tt>, <tt> fscanf</tt>, and related 
+functions.  However, it is occasionally useful to be able to read input
+as simply characters, and then process it within your program, or to be
+able to construct a line of text as a character string, and then write 
+it to a file.  To perform these kinds of tasks, you can open a file using
+<tt> fopen</tt>, and then pass the resulting <tt> FILE</tt> pointer to one of 
+the following routines:<br> 
+<p>
+To read or write one line at a time (where a line is defined by the presence
+of a newline character):
+</p><pre>    fgets(char *line, int maxlen, FILE *fp);
+    fputs(char *line, FILE *fp);
+</pre>
+To read or write one character at a time:
+<pre>    char getc(FILE *fp);   /* returns the next character from a file */
+    putc(char c, FILE *fp);
+</pre>
+These routines are declared in <tt> stdio.h</tt>, so that file should be 
+<tt> #include</tt>d in any program which calls them.
+<p>
+</p></li><li>
+There are even lower level I/O routines available which simply transfer 
+the internal representations of objects to a file, or tranfer bytes of
+information from a file to a specified location in the computer's memory.
+For example, you could scan in a set of formatted numbers, and then 
+write their internal binary representations to a file, which could very
+quickly and efficiently be read back into memory at a later time. (This
+is essentially the way virtual memory works.)  
+You can pass a <tt> FILE</tt>
+pointer from <tt> fopen</tt> to the <tt> fread</tt> or <tt> fwrite</tt> function
+s to
+acheive these goals.
+The prototypes for these functions are as follows:
+<pre>    int fread(char *from, int size, int nitems, FILE *fp);
+    int fwrite(char *to, int size, int nitems, FILE *fp);
+</pre>
+<p>
+The <tt> fread</tt> and <tt> fwrite</tt> functions return the number of items
+actually read.  They are declared in <tt> &lt;stdio.h&gt;</tt>.
+</p><p>
+</p></li><li>
+Although C has a reputation for not providing much support for character
+strings, there are a few handy functions available as part of the standard
+library.  Most of these routines expect that strings will be null terminated,
+so make sure you allow enough space to include the null character at the 
+end of the string.  When your string is not null-terminated, or you only
+want to manipulate a substring, use the version of the function with an
+``<tt> n</tt>'' in its name.
+<pre>   int strlen(char *s);    /* returns the length of a string */
+   int strcpy(char *to, char *from);   /* imitates to = from */
+   int strncpy(char *to, char *from, int n);
+   char *index(char *s,char c)        /* ptr to first c in s */
+   int strcmp(char *s1, char *s2); /* &lt;0 if s1&lt;s2, 0 if s1==s2, &gt;0 if s1&gt;s2 */
+   int strncmp(char *s1, char *s2, int n);
+</pre>
+There are quite a few other string handling functions; type <tt> man string</tt>
+for more information.
+</li></ol>
+<br> <hr>
+<p></p><address>
+<a href="mailto:spector@stat.berkeley.edu"><i>Phil Spector <br></i></a><i>
+Thu Sep 12 13:47:51 PDT 1996</i>
+</address>
+
+</body></html>

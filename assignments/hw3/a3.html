@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>STAT 243 ASSIGNMENT 3&nbsp;&nbsp;&nbsp;FALL, 2010</TITLE>
+<META NAME="description" CONTENT="a3">
+<META NAME="keywords" CONTENT="a3">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="a3.css">
+
+<LINK REL="next" HREF="node1.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="centerline" ID="par187" ALIGN="CENTER">
+<BIG CLASS="XLARGE"><B>STAT 243 ASSIGNMENT 3    FALL, 2009</B></BIG></DIV>
+<BR>
+<BR>
+<DIV CLASS="centerline" ID="par188" ALIGN="CENTER">
+<I>due Dec 3, 2010</I></DIV>
+
+<OL>
+<LI><BIG CLASS="LARGE"><B>Cholesky Decomposition</B></BIG>
+
+<P>
+Write and test a function for the Cholesky decomposition of a 
+symmetric positive definite matrix.  Test it on an arbitrary 
+symmetric positive definite matrix, and verify that it works 
+through multiplication or using R or matlab.
+</LI>
+<LI><BIG CLASS="LARGE"><B>Simulation</B></BIG>
+
+<P>
+In a one-way ANOVA, we test the null hypothesis that the means of several
+different groups are all equal to each other.  Let <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1.png"
+ ALT="$ x_{ij} $"></SPAN> represent 
+the <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$j$"></SPAN>th observation in the <SPAN CLASS="MATH"><IMG
+ WIDTH="10" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$i$"></SPAN>th group, with <SPAN CLASS="MATH"><IMG
+ WIDTH="83" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$i=1,\ldots,k$"></SPAN> 
+and <!-- MATH
+ $j=1,\ldots,n_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="91" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img5.png"
+ ALT="$j=1,\ldots,n_i$"></SPAN> .  Then a suitable test statistic for the 
+null hypothesis is: 
+<BR><P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{displaymath}
+F=\frac{\sum_{i=1}^k n_i(\bar{x_i} - \bar{x})^2/(k-1)}
+{\sum_{i=1}^k \sum_{j=1}^{n_i} (x_{ij}-\bar{x_i})^2/(N-k)}
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="252" HEIGHT="54" BORDER="0"
+ SRC="img6.png"
+ ALT="\begin{displaymath}
+F=\frac{\sum_{i=1}^k n_i(\bar{x_i} - \bar{x})^2/(k-1)}
+{\sum_{i=1}^k \sum_{j=1}^{n_i} (x_{ij}-\bar{x_i})^2/(N-k)}
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+where 
+<BR><P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{displaymath}
+\bar{x_i}=(1/n_i)\sum_{j=1}^{n_i} x_{ij},\qquad 
+\bar{x}=(1/N)\sum_{i=1}^k\sum_{j=1}^{n_i} x_{ij},\qquad \mbox{and } 
+N=\sum_{i=1}^k n_i
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="458" HEIGHT="58" BORDER="0"
+ SRC="img7.png"
+ ALT="\begin{displaymath}
+\bar{x_i}=(1/n_i)\sum_{j=1}^{n_i} x_{ij},\qquad
+\bar{x}=(1/...
+...\sum_{j=1}^{n_i} x_{ij},\qquad \mbox{and }
+N=\sum_{i=1}^k n_i
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+
+<P>
+Under the null hypothesis of the means being equal for all k groups, the
+statistic <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="$F$"></SPAN> follows the F-distribution with <SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img9.png"
+ ALT="$k-1$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="47" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.png"
+ ALT="$N-k$"></SPAN> degrees of
+freedom.
+
+<OL>
+<LI>Generate 5 groups of data, each with 6 uncorrelated observations from
+a normal distribution with mean 0 and variance 1. (This means that in 
+the formulas above, <SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="$k=5$"></SPAN>, and <SPAN CLASS="MATH"><IMG
+ WIDTH="48" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img12.png"
+ ALT="$n_i=6$"></SPAN> for <SPAN CLASS="MATH"><IMG
+ WIDTH="82" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img13.png"
+ ALT="$i=1,\ldots,5$"></SPAN>&nbsp;.)
+Use your programs from assignment 2 to
+generate the random numbers.  Test to see if the F-statistic described
+above follows an F-distribution by comparing the upper 90th, 95th and 99th
+percentiles of your observed F-statistics with their theoretical values
+found either in tables or from the appropriate <TT>dcdflib</TT> routine. 
+(You'll need
+to sort your data to find the percentiles; either use routines from
+a subroutine library such as the GNU Scientific Library (<TT>libgsl</TT>),
+or 
+``borrow'' the function in sort.c from the s243 class 
+account - i.e. - <TT>s243/samples/sort.c</TT>)
+</LI>
+<LI>Repeat part a), but instead of using 6 uncorrelated observations in each
+of the 5 groups, generate 6 correlated variables with 
+corr(<SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.png"
+ ALT="$x_i$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img15.png"
+ ALT="$x_j$"></SPAN>) = <SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img16.png"
+ ALT="$.7^{\vert i-j\vert}$"></SPAN>. What does this tell you 
+about the 
+behavior of the F-statistic in a one-way ANOVA when the data is 
+correlated?
+</LI>
+</OL>
+</LI>
+<LI><BIG CLASS="LARGE"><B>Gram-Schmidt orthogonalization</B></BIG>
+
+<P>
+Write and test a function for the Gram-Schmidt 
+orthogonalization of
+an arbitrary <SPAN CLASS="MATH"><IMG
+ WIDTH="41" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img17.png"
+ ALT="$n \times p$"></SPAN> matrix.  Test it on a matrix of your choice, and 
+verify that it works either through multiplication or using R or matlab.
+
+<P>
+</LI>
+<LI><BIG CLASS="LARGE"><B>Regression using Gram-Schmidt orthogonalization</B></BIG>
+
+<P>
+Write a program which takes as input a matrix of <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img18.png"
+ ALT="$X$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img19.png"
+ ALT="$y$"></SPAN> values and 
+then performs a regression using the function for Gram-Schmidt 
+orthogonalization that you wrote in part 3.  The output of the program
+should include the parameter estimates, the standard errors of the 
+parameters,
+the estimated value
+of <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img20.png"
+ ALT="$\sigma^2$"></SPAN> and the residual value
+for each observation.
+<BR><I>Hints</I>:  Let <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img18.png"
+ ALT="$X$"></SPAN> be <SPAN CLASS="MATH"><IMG
+ WIDTH="41" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img17.png"
+ ALT="$n \times p$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img19.png"
+ ALT="$y$"></SPAN> be <SPAN CLASS="MATH"><IMG
+ WIDTH="41" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img21.png"
+ ALT="$n \times 1$"></SPAN>.  If you use the 
+augmented matrix <SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img22.png"
+ ALT="$X:y$"></SPAN> instead of just <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img18.png"
+ ALT="$X$"></SPAN>, and orthogonalize
+only the first p columns, then the last column of the orthogonalized
+matrix will be the residuals.  To get the standard errors of the 
+parameter estimates, you may need to invert an upper triangular 
+matrix.  You can use the following algorithm. Let T be a <SPAN CLASS="MATH"><IMG
+ WIDTH="39" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img23.png"
+ ALT="$p \times p$"></SPAN>
+upper triangular matrix, and let U be it's inverse.
+<PRE><TT>
+for <SPAN CLASS="MATH"><IMG
+ WIDTH="46" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img24.png"
+ ALT="$j=~p$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$1$"></SPAN> by <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img26.png"
+ ALT="$-1$"></SPAN>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN CLASS="MATH"><IMG
+ WIDTH="81" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img27.png"
+ ALT="$u_{jj}=1 / t_{jj}$"></SPAN>
+<BR>&nbsp;&nbsp;&nbsp; for <SPAN CLASS="MATH"><IMG
+ WIDTH="69" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img28.png"
+ ALT="$k=j - 1$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="img25.png"
+ ALT="$1$"></SPAN> by <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img26.png"
+ ALT="$-1$"></SPAN>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN CLASS="MATH"><IMG
+ WIDTH="197" HEIGHT="39" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$u_{kj}=-(\sum_{i=k+1}^{j} t_{ki} u_{ij}) / t_{kk}$"></SPAN>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp; end
+</TT></PRE>
+</LI>
+</OL>
+<BR>
+</BODY>
+</HTML>

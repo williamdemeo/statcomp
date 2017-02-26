@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta name="GENERATOR" content="TtH 3.67">
+ <style type="text/css"> div.p { margin-top: 7pt;}</style>
+ <style type="text/css"><!--
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td div.norm {line-height:normal;}
+ span.roman {font-family: serif; font-style: normal; font-weight: normal;} 
+ span.overacc2 {position: relative;  left: .8em; top: -1.2ex;}
+ span.overacc1 {position: relative;  left: .6em; top: -1.2ex;} --></style>
+
+ 
+<title>STAT 243 ASSIGNMENT 4&nbsp;&nbsp;&nbsp;FALL, 2010</title>
+ 
+<h1 align="center"><font size="+2"><b>STAT 243 ASSIGNMENT 4 FALL, 2010</b></font> </h1>
+
+
+<table align="center" border="0"><tr><td>
+</td><td align="right"> <i>due December 10, 2010</i></td></tr></table><!--hboxt-->
+
+<ol type="1">
+<li><font size="+1"><b>Sweep</b></font>
+
+<div class="p"><!----></div>
+Write and test a subroutine to sweep the columns of a 
+square matrix.  The subroutine should be written so that
+the calling routine can specify which columns of the matrix are
+to be swept.  This would be necessary, for example, in stepwise
+regression. Test it on an 
+a matrix of your choice, and try to verify the results 
+through some other means.  Make sure you read and understand part
+2 of the assignment before writing the subroutine, and you can 
+save yourself some work.
+
+<div class="p"><!----></div>
+<i>Hint:</i>&nbsp;&nbsp;One way to test the function is to sweep <em>all</em> 
+the columns of 
+the matrix and compare the result to the inverse of the matrix
+obtained from R, matlab, etc.  You can also form a test matrix
+as an augmented X<font face="symbol">¢</font
+>X matrix, and use your subroutine to perform
+a series of regressions, checking the results with a
+package or subroutine library, or the Gram-Schmidt regression 
+program you wrote for
+assignment 3.
+<div class="p"><!----></div>
+</li>
+
+<li>
+<font size="+1"><b>Writing Functions in R</b></font>
+
+<div class="p"><!----></div>
+Write a function in R which will call the sweep subroutine from 
+part 1 of this assignment.  Name the R function "<tt>bsweep</tt>" to avoid
+conflict with the R function "<tt>sweep</tt>" which performs a different
+operation on a matrix.  There should be two arguments to the R function;
+the matrix to be swept, and a vector of indices
+of the columns which are to be swept.  Verify that the function works 
+by performing a regression with it. 
+Don't forget that
+R stores it's matrices by columns, not by rows.
+<div class="p"><!----></div>
+</li>
+
+<li>
+<font size="+1"><b>Non-linear regression</b></font>
+
+<div class="p"><!----></div>
+Write a program in C to perform non-linear regression.  The
+core of your program should be a function which is passed the data for
+the regression and the name of functions  which will evaluate the 
+non-linear function being fit and its gradient.  (Make sure to 
+write your function so you can change the routines which will be
+evaluating the regression function and the gradient through the argument
+list.) Use the Gauss-Newton
+algorithm with capability for step halving when necessary, and notice 
+that there are a variety of ways to determine the
+iterative step directions: Cholesky decomposition of J(<font face="symbol">q</font
+>)<font face="symbol">¢</font
+>J(<font face="symbol">q</font
+>) 
+followed by solution of a triangular system of equations 
+or regression of f(<font face="symbol">q</font
+>) on J(<font face="symbol">q</font
+>)
+to name two. Test your program on the two data sets contained in the files
+prob1 and prob2 in the s243 samples directory. A description of the content
+of these files is in the files prob1.des and prob2.des in the same
+directory (<tt>&#126;s243/samples</tt>). If you have the time and 
+inclination, you can verify your results using R, SAS,
+or any 
+other method you know of.
+<div class="p"><!----></div>
+</li>
+
+<li>
+<font size="+1"><b>EXTRA CREDIT I: R Function for Stepwise Regression</b></font>
+
+<div class="p"><!----></div>
+Write an R function to perform backward deletion using the bsweep
+function which you wrote in part 1.   The function should have an
+option for inclusion of an intercept, and should return a logical
+matrix which has one row for each model investigated, and a column for
+each variable containing either <tt>TRUE</tt> or <tt>FALSE</tt>, depending
+on whether or not each variable is involved in that regression.
+How would you change the design of the function in order to make
+it run more quickly?
+<div class="p"><!----></div>
+</li>
+
+<li>
+<font size="+1"><b>EXTRA CREDIT II: R Function for Non-Linear Regression</b></font>
+
+<div class="p"><!----></div>
+Write an R interface to the non-linear regression
+program written in part 3.  The interface should allow you to define
+the non-linear function and its gradient as functions in R which will
+be passed to your program using the <tt>call_R</tt> function. (If you choose
+to do this part of the assignment and run into problems, don't hesitate
+to ask questions!)
+<div class="p"><!----></div>
+</li>
+</ol>
+
+<br /><br /><hr /><small>File translated from
+T<sub><font size="-1">E</font></sub>X
+by <a href="http://hutchinson.belmont.ma.us/tth/">
+T<sub><font size="-1">T</font></sub>H</a>,
+version 3.67.<br />On 18 Aug 2010, 14:37.</small>
+</html>

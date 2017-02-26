@@ -1,0 +1,43 @@
+Subject: Re: BLAS
+
+
+Use the option "-lsunperf" for the Sun Performance Library which contains
+"lapack, blas, and linpack.
+
+							Rick_
+
+Subject: Re: BLAS
+
+
+On Wed, 24 Sep 1997, William J. De Meo wrote:
+
+> Hi,
+> 
+> One of my assignments asks that I run a few lapack routines using the
+> Basic Linear Algebra Subroutines for whatever workstation I'm using and
+> make some performance comparisons. Can you tell me if the BLAS for the
+> Ultra 2's have been installed at the SCF, and if so, is there any
+> documentation about using them?
+> 
+> Thanks,
+> 
+> Chip
+
+The BLAS routines, along with LAPACK and LINPACK, are contained in the 
+Sun Performance Library, accessed through the -lsunperf flag.  The SPL
+contains versions of these libraries optimized for use on SPARC computers.
+You can see brief descriptions and calling sequences for the routines in
+the blas library in the file /app/cmlib/doc/blas; there is also a man page
+for lapack. The man pages for the individual routines in BLAS and LAPACK are
+available through their names (for example, man ddot or man dsysv).
+
+                                                              - Phil
+
+Subject: Re: BLAS (sunperf)
+
+P.S. The complete reference manual for the Sun Performance Libraries
+is in the postscript files /opt/SUNWspro/READMEs/libsunperf*
+
+You can view them online with ghostview.
+
+
