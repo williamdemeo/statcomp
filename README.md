@@ -12,3 +12,6 @@
 **N.B.** some of the programs depend on
 [the blas](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms) and
 the programs in the [lib](https://github.com/williamdemeo/statcomp/tree/master/lib) directory.
+
+
+**See Also:** the [libwjd](https://github.com/williamdemeo/libwjd) repository
